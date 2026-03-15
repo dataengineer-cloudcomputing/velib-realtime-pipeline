@@ -1,45 +1,51 @@
-Overview
-========
+# 🚲 Vélib Real-Time Monitoring Pipeline
 
-Welcome to Astronomer! This project was generated after you ran 'astro dev init' using the Astronomer CLI. This readme describes the contents of the project, as well as how to run Apache Airflow on your local machine.
+Ce projet déploie une **Modern Data Stack** complète pour surveiller en temps réel la disponibilité des vélos en libre-service dans la métropole parisienne.
 
-Project Contents
-================
+---
 
-Your Astro project contains the following files and folders:
+## 🇫🇷 Version Française
 
-- dags: This folder contains the Python files for your Airflow DAGs. By default, this directory includes one example DAG:
-    - `example_astronauts`: This DAG shows a simple ETL pipeline example that queries the list of astronauts currently in space from the Open Notify API and prints a statement for each astronaut. The DAG uses the TaskFlow API to define tasks in Python, and dynamic task mapping to dynamically print a statement for each astronaut. For more on how this DAG works, see our [Getting started tutorial](https://www.astronomer.io/docs/learn/get-started-with-airflow).
-- Dockerfile: This file contains a versioned Astro Runtime Docker image that provides a differentiated Airflow experience. If you want to execute other commands or overrides at runtime, specify them here.
-- include: This folder contains any additional files that you want to include as part of your project. It is empty by default.
-- packages.txt: Install OS-level packages needed for your project by adding them to this file. It is empty by default.
-- requirements.txt: Install Python packages needed for your project by adding them to this file. It is empty by default.
-- plugins: Add custom or community plugins for your project to this file. It is empty by default.
-- airflow_settings.yaml: Use this local-only file to specify Airflow Connections, Variables, and Pools instead of entering them in the Airflow UI as you develop DAGs in this project.
+### 📋 Présentation
+L'objectif est de démontrer un flux de données industriel (End-to-End) : de l'extraction d'une API publique jusqu'à la visualisation géographique, en passant par un entrepôt de données cloud.
 
-Deploy Your Project Locally
-===========================
+### 🏗️ Architecture
+- **Orchestration** : Airflow (via Astro CLI) pour piloter le flux.
+- **Ingestion** : Script Python extrayant ~1450 stations de l'API Open Data Paris.
+- **Stockage** : Google BigQuery (Data Warehouse).
+- **Transformation** : dbt (Data Build Tool) pour le nettoyage et le typage géospatial.
+- **Visualisation** : Looker Studio pour le dashboard cartographique.
 
-Start Airflow on your local machine by running 'astro dev start'.
+### 🚀 Guide de démarrage rapide
+1. **Cloner le projet** : `git clone <URL_DU_DEPOT>`
+2. **Configuration** : Placez votre fichier `google_key.json` (clé de compte de service GCP) à la racine du projet.
+3. **Lancement** : Exécutez `astro dev start` dans votre terminal.
+4. **Utilisation** : Accédez à Airflow (`localhost:8080`) et activez le DAG. Les données seront automatiquement traitées et envoyées vers BigQuery.
 
-This command will spin up five Docker containers on your machine, each for a different Airflow component:
+---
 
-- Postgres: Airflow's Metadata Database
-- Scheduler: The Airflow component responsible for monitoring and triggering tasks
-- DAG Processor: The Airflow component responsible for parsing DAGs
-- API Server: The Airflow component responsible for serving the Airflow UI and API
-- Triggerer: The Airflow component responsible for triggering deferred tasks
+## 🇬🇧 English Version
 
-When all five containers are ready the command will open the browser to the Airflow UI at http://localhost:8080/. You should also be able to access your Postgres Database at 'localhost:5432/postgres' with username 'postgres' and password 'postgres'.
+### 📋 Overview
+This project demonstrates a professional End-to-End data pipeline: from public API extraction to geographic visualization, using a cloud data warehouse.
 
-Note: If you already have either of the above ports allocated, you can either [stop your existing Docker containers or change the port](https://www.astronomer.io/docs/astro/cli/troubleshoot-locally#ports-are-not-available-for-my-local-airflow-webserver).
+### 🏗️ Architecture
+- **Orchestration**: Airflow (via Astro CLI) to manage the workflow.
+- **Ingestion**: Python script extracting ~1450 stations from the Paris Open Data API.
+- **Storage**: Google BigQuery (Data Warehouse).
+- **Transformation**: dbt (Data Build Tool) for cleaning and geospatial typing.
+- **Visualization**: Looker Studio for the mapping dashboard.
 
-Deploy Your Project to Astronomer
-=================================
+### 🚀 Quick Start Guide
+1. **Clone the project**: `git clone <URL_DU_REPO>`
+2. **Setup**: Place your `google_key.json` (GCP Service Account key) in the project root.
+3. **Start**: Run `astro dev start` in your terminal.
+4. **Run**: Access Airflow (`localhost:8080`) and trigger the DAG. Data will be automatically processed and loaded into BigQuery.
 
-If you have an Astronomer account, pushing code to a Deployment on Astronomer is simple. For deploying instructions, refer to Astronomer documentation: https://www.astronomer.io/docs/astro/deploy-code/
+---
 
-Contact
-=======
-
-The Astronomer CLI is maintained with love by the Astronomer team. To report a bug or suggest a change, reach out to our support.
+## 💡 Use Case: Energy & Smart Grids (Enedis)
+Cette architecture est directement adaptable à la supervision de réseaux électriques :
+- **Monitoring** : Remplacer les vélos par la charge des transformateurs ou bornes IRVE.
+- **Maintenance** : Visualisation en temps réel des zones de tension ou des pannes.
+- **Scalabilité** : Capacité à gérer des milliers de points de mesure géolocalisés.
