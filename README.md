@@ -22,6 +22,12 @@ L'objectif est de démontrer un flux de données industriel (End-to-End) : de l'
 3. **Lancement** : Exécutez `astro dev start` dans votre terminal.
 4. **Utilisation** : Accédez à Airflow (`localhost:8080`) et activez le DAG. Les données seront automatiquement traitées et envoyées vers BigQuery.
 
+### 🚀🚀 Installation & Reproduction
+1. **Cloner le projet** :
+   ```bash
+   git clone [https://github.com/dataengineer-cloudcomputing/velib-realtime-pipeline.git](https://github.com/dataengineer-cloudcomputing/velib-realtime-pipeline.git)
+   cd velib-realtime-pipeline
+
 ---
 
 ### 🔗 [Link to the map Looker Studio] : https://lookerstudio.google.com/u/0/reporting/922fff75-3148-492c-bdfc-cb90219018e2/page/ATFsF
@@ -46,12 +52,10 @@ This project demonstrates a professional End-to-End data pipeline: from public A
 3. **Start**: Run `astro dev start` in your terminal.
 4. **Run**: Access Airflow (`localhost:8080`) and trigger the DAG. Data will be automatically processed and loaded into BigQuery.
 
----
-
-## 💡 Use Case: Energy & Smart Grids (Enedis)
-Cette architecture est directement adaptable à la supervision de réseaux électriques :
-- **Monitoring** : Remplacer les vélos par la charge des transformateurs ou bornes IRVE.
-- **Maintenance** : Visualisation en temps réel des zones de tension ou des pannes.
-- **Scalabilité** : Capacité à gérer des milliers de points de mesure géolocalisés.
+### 🚀🚀 Installation and Reproduction
+1. **Clone the project**:
+   ```bash
+   git clone [https://github.com/dataengineer-cloudcomputing/velib-realtime-pipeline.git](https://github.com/dataengineer-cloudcomputing/velib-realtime-pipeline.git)
+   cd velib-realtime-pipeline
 
   
