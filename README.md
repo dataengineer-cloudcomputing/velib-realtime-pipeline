@@ -24,6 +24,10 @@ L'objectif est de démontrer un flux de données industriel (End-to-End) : de l'
 
 ---
 
+### 🔗 [Link to the map Looker Studio] : https://lookerstudio.google.com/u/0/reporting/922fff75-3148-492c-bdfc-cb90219018e2/page/ATFsF
+
+---
+
 ## 🇬🇧 English Version
 
 ### 📋 Overview
@@ -49,3 +53,5 @@ Cette architecture est directement adaptable à la supervision de réseaux élec
 - **Monitoring** : Remplacer les vélos par la charge des transformateurs ou bornes IRVE.
 - **Maintenance** : Visualisation en temps réel des zones de tension ou des pannes.
 - **Scalabilité** : Capacité à gérer des milliers de points de mesure géolocalisés.
+
+  
