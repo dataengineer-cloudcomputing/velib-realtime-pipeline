@@ -1,0 +1,13 @@
+velib_transform:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: service-account
+      project: velib-pipeline-project
+      dataset: velib_clean
+      threads: 1
+      keyfile: /usr/local/airflow/include/velib_transform/google_key.json
+      location: US
+      priority: interactive
+      timeout_seconds: 300

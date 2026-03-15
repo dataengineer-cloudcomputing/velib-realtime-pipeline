@@ -1,0 +1,31 @@
+# SÉCURITÉ : Clés Google Cloud
+google_key.json
+include/velib_transform/google_key.json
+
+# Environnement Python & Mac
+dbt_env/
+.venv/
+__pycache__/
+.DS_Store
+
+# Fichiers locaux Astro/Airflow (à ne pas partager)
+.astro/
+airflow.cfg
+airflow.db
+airflow-webserver.pid
+webserver_config.py
+airflow_settings.yaml
+
+# dbt
+target/
+logs/
+.env
+.DS_Store
+airflow_settings.yaml
+__pycache__/
+astro
+.venv
+airflow-webserver.pid
+webserver_config.py
+airflow.cfg
+airflow.db
