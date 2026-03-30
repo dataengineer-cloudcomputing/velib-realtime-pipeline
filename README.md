@@ -1,7 +1,7 @@
 # 🚲 Monitoring Temps-Réel Velib Métropole (Pipeline Data)
 
 ## 📌 Présentation du Projet
-Ce projet met en place un pipeline de données automatisé pour monitorer la disponibilité des vélos (mécaniques vs électriques) sur l'ensemble du réseau Velib Métropole, avec un focus particulier sur la zone de **Courbevoie** et de **Paris**.
+Ce projet met en place un pipeline de données automatisé pour monitorer la disponibilité des vélos (mécaniques vs électriques) sur l'ensemble du réseau Velib Métropole en région Ile-de-France.
 
 L'objectif est d'offrir une visibilité en temps réel sur l'état des stations pour optimiser la maintenance et l'usage des bornes électriques.
 
@@ -21,7 +21,7 @@ Le DAG récupère les données de ~1400 stations. Contrairement aux versions sta
 
 ### 2. Transformation (dbt)
 Les données brutes sont transformées pour :
-* Calculer le statut opérationnel de la station (HORS SERVICE, VERT UNIQUEMENT, etc.).
+* Calculer le statut opérationnel de la station (HORS SERVICE, VERT UNIQUEMENT, BLEU UNIQUEMENT, etc.).
 * Convertir les coordonnées géographiques pour la cartographie.
 * Nettoyer les types de données pour BigQuery.
 
@@ -40,7 +40,7 @@ Un tableau de bord interactif permet de :
 # 🚲 Real-Time Monitoring of Velib Métropole (Data Pipeline)
 
 ## 📌 Project Overview
-This project implements an automated data pipeline to monitor the availability of bicycles (mechanical vs. electric) across the entire Velib Métropole network, with a particular focus on the **Courbevoie** and **Paris** areas.
+This project implements an automated data pipeline to monitor the availability of bicycles (mechanical vs. electric) across the entire Velib Métropole network in Ile-de-France.
 
 The goal is to provide real-time visibility into station status to optimize maintenance and usage of electric charging stations.
 
@@ -60,7 +60,7 @@ The DAG retrieves data from ~1,400 stations. Unlike standard versions, this pipe
 
 ### 2. Transformation (dbt)
 The raw data is transformed to:
-* Calculate the station’s operational status (OUT OF SERVICE, GREEN ONLY, etc.).
+* Calculate the station’s operational status (OUT OF SERVICE, GREEN ONLY, BLUE ONLY, etc.).
 * Convert geographic coordinates for mapping.
 * Clean the data types for BigQuery.
 
