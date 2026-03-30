@@ -1,61 +1,77 @@
-# 🚲 Vélib Real-Time Monitoring Pipeline
+# 🚲 Monitoring Temps-Réel Velib Métropole (Pipeline Data)
 
-Ce projet déploie une **Modern Data Stack** complète pour surveiller en temps réel la disponibilité des vélos en libre-service dans la métropole parisienne.
+## 📌 Présentation du Projet
+Ce projet met en place un pipeline de données automatisé pour monitorer la disponibilité des vélos (mécaniques vs électriques) sur l'ensemble du réseau Velib Métropole, avec un focus particulier sur la zone de **Courbevoie** et de **Paris**.
 
----
+L'objectif est d'offrir une visibilité en temps réel sur l'état des stations pour optimiser la maintenance et l'usage des bornes électriques.
 
-## 🇫🇷 Version Française
+## 🏗️ Architecture Technique
+Le projet repose sur une stack moderne de Data Engineering :
+* **Extraction** : API Open Data Paris (v1.0) via Python (Requests/Pandas).
+* **Orchestration** : **Apache Airflow** (exécution horaire).
+* **Stockage (Data Warehouse)** : **Google BigQuery**.
+* **Transformation** : **dbt** (Data Build Tool) pour le nettoyage et la logique métier.
+* **Visualisation** : **Google Looker Studio**.
 
-### 📋 Présentation
-L'objectif est de démontrer un flux de données industriel (End-to-End) : de l'extraction d'une API publique jusqu'à la visualisation géographique, en passant par un entrepôt de données cloud.
 
-### 🏗️ Architecture
-- **Orchestration** : Airflow (via Astro CLI) pour piloter le flux.
-- **Ingestion** : Script Python extrayant ~1450 stations de l'API Open Data Paris.
-- **Stockage** : Google BigQuery (Data Warehouse).
-- **Transformation** : dbt (Data Build Tool) pour le nettoyage et le typage géospatial.
-- **Visualisation** : Looker Studio pour le dashboard cartographique.
 
-### 🚀 Guide de démarrage rapide
-1. **Cloner le projet** : `git clone <URL_DU_DEPOT>`
-2. **Configuration** : Placez votre fichier `google_key.json` (clé de compte de service GCP) à la racine du projet.
-3. **Lancement** : Exécutez `astro dev start` dans votre terminal.
-4. **Utilisation** : Accédez à Airflow (`localhost:8080`) et activez le DAG. Les données seront automatiquement traitées et envoyées vers BigQuery.
+## 🛠️ Pipeline de Données
+### 1. Extraction (Airflow)
+Le DAG récupère les données de ~1400 stations. Contrairement aux versions standards, ce pipeline extrait spécifiquement le détail des vélos mécaniques (`mechanical`) et électriques (`ebike`) pour une analyse fine.
 
-### 🚀🚀 Installation & Reproduction
-1. **Cloner le projet** :
-   ```bash
-   git clone [https://github.com/dataengineer-cloudcomputing/velib-realtime-pipeline.git](https://github.com/dataengineer-cloudcomputing/velib-realtime-pipeline.git)
-   cd velib-realtime-pipeline
+### 2. Transformation (dbt)
+Les données brutes sont transformées pour :
+* Calculer le statut opérationnel de la station (HORS SERVICE, VERT UNIQUEMENT, etc.).
+* Convertir les coordonnées géographiques pour la cartographie.
+* Nettoyer les types de données pour BigQuery.
 
----
+### 3. Visualisation (Looker Studio)
+Un tableau de bord interactif permet de :
+* Visualiser la position GPS exacte des stations.
+* Identifier les pannes via un code couleur métier.
+* Consulter le détail précis (Verts vs Bleus) au survol des stations.
 
-### 🔗 [Link to the map Looker Studio] : https://lookerstudio.google.com/u/0/reporting/922fff75-3148-492c-bdfc-cb90219018e2/page/ATFsF
+## 🚀 Installation & Utilisation
+1. Cloner le repo.
+2. Placer le DAG dans votre dossier Airflow.
+3. Configurer les credentials Google Cloud (`google_key.json`).
+4. Lancer `dbt run` pour initialiser les tables de production.
 
----
+# 🚲 Real-Time Monitoring of Velib Métropole (Data Pipeline)
 
-## 🇬🇧 English Version
+## 📌 Project Overview
+This project implements an automated data pipeline to monitor the availability of bicycles (mechanical vs. electric) across the entire Velib Métropole network, with a particular focus on the **Courbevoie** and **Paris** areas.
 
-### 📋 Overview
-This project demonstrates a professional End-to-End data pipeline: from public API extraction to geographic visualization, using a cloud data warehouse.
+The goal is to provide real-time visibility into station status to optimize maintenance and usage of electric charging stations.
 
-### 🏗️ Architecture
-- **Orchestration**: Airflow (via Astro CLI) to manage the workflow.
-- **Ingestion**: Python script extracting ~1450 stations from the Paris Open Data API.
-- **Storage**: Google BigQuery (Data Warehouse).
-- **Transformation**: dbt (Data Build Tool) for cleaning and geospatial typing.
-- **Visualization**: Looker Studio for the mapping dashboard.
+## 🏗️ Technical Architecture
+The project is built on a modern data engineering stack:
+* **Extraction**: Open Data Paris API (v1.0) via Python (Requests/Pandas).
+* **Orchestration**: **Apache Airflow** (hourly execution).
+* **Storage (Data Warehouse)**: **Google BigQuery**.
+* **Transformation**: **dbt** (Data Build Tool) for data cleaning and business logic.
+* **Visualization**: **Google Looker Studio**.
 
-### 🚀 Quick Start Guide
-1. **Clone the project**: `git clone <URL_DU_REPO>`
-2. **Setup**: Place your `google_key.json` (GCP Service Account key) in the project root.
-3. **Start**: Run `astro dev start` in your terminal.
-4. **Run**: Access Airflow (`localhost:8080`) and trigger the DAG. Data will be automatically processed and loaded into BigQuery.
+------------------------------------------------------------------------------------
 
-### 🚀🚀 Installation and Reproduction
-1. **Clone the project**:
-   ```bash
-   git clone [https://github.com/dataengineer-cloudcomputing/velib-realtime-pipeline.git](https://github.com/dataengineer-cloudcomputing/velib-realtime-pipeline.git)
-   cd velib-realtime-pipeline
+## 🛠️ Data Pipeline
+### 1. Extraction (Airflow)
+The DAG retrieves data from ~1,400 stations. Unlike standard versions, this pipeline specifically extracts details for mechanical (`mechanical`) and electric (`ebike`) bikes for detailed analysis.
 
-  
+### 2. Transformation (dbt)
+The raw data is transformed to:
+* Calculate the station’s operational status (OUT OF SERVICE, GREEN ONLY, etc.).
+* Convert geographic coordinates for mapping.
+* Clean the data types for BigQuery.
+
+### 3. Visualization (Looker Studio)
+An interactive dashboard allows you to:
+* View the exact GPS location of the stations.
+* Identify outages using a color-coded system.
+* View detailed information (Green vs. Blue) when hovering over stations.
+
+## 🚀 Installation & Usage
+1. Clone the repo.
+2. Place the DAG in your Airflow folder.
+3. Configure Google Cloud credentials (`google_key.json`).
+4. Run `dbt run` to initialize the production tables.
